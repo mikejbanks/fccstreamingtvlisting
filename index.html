@@ -3,12 +3,14 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
+/*List of Twitch Streamers to check account/streaming status.*/ 
 var twitchStreamers = ["dreamhackcs", "skyzhar", "faceittv", "comster404", "brunofin", "terakilobyte", "robotcaleb", "sheevergaming", "esl_sc2", "ogamingsc2", "jacksofamerica", "fdlsjfdsl39"];
 
 $( document ).ready(function() {
    sendAllStreamersList()
 });
 
+/*Shows status of a channel (out of set of all online channels) through Twitch API*/
 function listOneChannelOnline(streamer) {
 $('#centerdisplay').empty();
 	$.getJSON('https://api.twitch.tv/kraken/streams/' + streamer + '?client_id=3ayqtffruo2goxf0cvyp75wjm28g4pq&callback=?', function(data) {
@@ -31,7 +33,7 @@ $('#centerdisplay').empty();
     console.log(data);
 });
 	};
-
+/*Shows status of a channel (out of set of all channels) through Twitch API*/
 function listOneChannelAll(streamer) {
 	$('#centerdisplay').empty();
 	$.getJSON('https://api.twitch.tv/kraken/streams/' + streamer + '?client_id=3ayqtffruo2goxf0cvyp75wjm28g4pq&callback=?', function(data) {
@@ -65,7 +67,7 @@ function listOneChannelAll(streamer) {
 });
 	};
 
-	
+/*Shows status of a channel (out of set of all offline channels) through Twitch API*/
 function listOneChannelOffline(streamer) {
 	$('#centerdisplay').empty();
 	$.getJSON('https://api.twitch.tv/kraken/streams/' + streamer + '?client_id=3ayqtffruo2goxf0cvyp75wjm28g4pq&callback=?', function(data) {
@@ -89,18 +91,21 @@ function listOneChannelOffline(streamer) {
 });
 	};
 
+/*Shows all channels*/
 function sendAllStreamersList(){
 for (var i = 0; i < twitchStreamers.length; i++) {
 		listOneChannelAll(twitchStreamers[i]);
 }
 } 
 
+/*Shows online channels*/
 function sendOnlineStreamersList(){
 for (var i = 0; i < twitchStreamers.length; i++) {
 		listOneChannelOnline(twitchStreamers[i]);
 }
 } 
 
+/*Shows offline channels*/
 function sendOfflineStreamersList(){
 for (var i = 0; i < twitchStreamers.length; i++) {
 		listOneChannelOffline(twitchStreamers[i]);
